@@ -1,0 +1,6 @@
+applicationType: cli
+defaultPackage: com.graqr
+testFramework: spock
+sourceLanguage: java
+buildTool: maven
+features: [app-name, data, data-jdbc, groovy-maven-plus-plugin, groovy-sql, http-client-test, java, jdbc-hikari, logback, maven, maven-enforcer-plugin, picocli, picocli-java-application, picocli-spock, postgres, readme, serialization-jackson, shade, spock, test-resources, yaml, yaml-build]
