@@ -18,7 +18,10 @@
     <release.version>17</release.version>
     <micronaut.version>4.4.3</micronaut.version>
     <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
-    <exec.mainClass>com.graqr.ThreshrCliCommand</exec.mainClass>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.organization>graqr</sonar.organization>
+    <sonar.projectKey>Graqr_threshr-cli</sonar.projectKey>
+    <exec.mainClass>com.graqr.PdpCommand</exec.mainClass>
   </properties>
 
   <repositories>
@@ -132,7 +135,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <!-- Uncomment to enable incremental compilation -->
-          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+           <useIncrementalCompilation>false</useIncrementalCompilation>
 
           <annotationProcessorPaths combine.self="override">
             <path>
@@ -179,6 +182,30 @@
           </compilerArgs>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.11</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <formats>
+                <format>XML</format>
+              </formats>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -195,4 +222,49 @@
        </snapshots>
     </pluginRepository>
   </pluginRepositories>
+  <profiles>
+
+    <profile>
+      <id>coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.11</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <formats>
+                    <format>XML</format>
+                  </formats>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.7</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
