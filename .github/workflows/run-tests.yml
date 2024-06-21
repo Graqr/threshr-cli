@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: '17.0.9'
           distribution: 'graalvm-community'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PR_WRITE }}
           native-image-pr-reports: 'true'
       - name: build with maven wrapper
         env:
