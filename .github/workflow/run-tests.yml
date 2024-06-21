@@ -1,0 +1,28 @@
+name: Run Tests on GraalVM
+on: [push, pull_request]
+jobs:
+  test:
+    environment: redsky api
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/actions/virtual-environments/issues/709
+      - name: "󰆴 Free disk space"
+        run: |
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo apt-get clean
+          df -h
+      - uses: actions/checkout@v4
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '17.0.9'
+          distribution: 'graalvm-community'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-pr-reports: 'true'
+      - name: build with maven wrapper
+        env:
+          THRESHR_KEY: ${{ secrets.THRESHR_KEY }}
+          THRESHR_CHANNEL: ${{ vars.THRESHR_CHANNEL }}
+          TEST_DATASOURCES_DEFAULT_URL: ${{ secrets.TEST_DATASOURCES_DEFAULT_URL }}
+          GITHUB_TOKEN: ${{ secrets.SONAR_GITHUB_TOKEN }}
+        run: ./mvnw  -B -V clean test -f pom.xml
