@@ -23,7 +23,7 @@ jobs:
           github-token: ${{ secrets.PR_WRITE }}
           native-image-job-reports: 'true'
       - name: build with maven wrapper
-        run: ./mvnw -Pnative -f pom.xml -B -V clean package -DskipTests=true
+        run: mvn -Pnative -f pom.xml -B -V clean package -DskipTests=true
       - name: upload compiled binary for ${{ matrix.os }}
         uses: actions/upload-artifact@v4
         with:

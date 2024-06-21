@@ -40,13 +40,13 @@ jobs:
     - name: "SonarCloud Scan"
       env:
         THRESHR_KEY: ${{ secrets.THRESHR_KEY }}
-        THRESHR_CHANNEL: ${{ vars.THRESHR_CHANNEL }}
+        THRESHR_CHANNEL: ${{ secrets.THRESHR_CHANNEL }}
         TEST_DATASOURCES_DEFAULT_URL: ${{ secrets.TEST_DATASOURCES_DEFAULT_URL }}
         GITHUB_TOKEN: ${{ secrets.SONAR_GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        ./mvnw -B -V -Pcoverage -Dmaven.verify.skip=true test org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-        ./mvnw -B -V verify -Dmaven.verify.skip=true org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        mvn -B -V -Pcoverage -Dmaven.verify.skip=true test org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        mvn -B -V verify -Dmaven.verify.skip=true org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
       # on windows, add double quotes like below
       #.\mvnw -Pcoverage test org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Graqr_Threshr
       #.\mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -D"sonar.projectKey=Graqr_Threshr"
