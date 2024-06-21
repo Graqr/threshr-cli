@@ -33,6 +33,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.11</version>
+    </dependency>
+    <dependency>
       <groupId>com.graqr</groupId>
       <artifactId>threshr</artifactId>
       <version>0.0.13</version>
