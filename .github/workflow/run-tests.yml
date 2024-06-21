@@ -24,5 +24,4 @@ jobs:
           THRESHR_KEY: ${{ secrets.THRESHR_KEY }}
           THRESHR_CHANNEL: ${{ vars.THRESHR_CHANNEL }}
           TEST_DATASOURCES_DEFAULT_URL: ${{ secrets.TEST_DATASOURCES_DEFAULT_URL }}
-          GITHUB_TOKEN: ${{ secrets.SONAR_GITHUB_TOKEN }}
         run: ./mvnw  -B -V clean test -f pom.xml
