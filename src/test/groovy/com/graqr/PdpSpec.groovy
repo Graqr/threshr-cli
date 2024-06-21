@@ -47,7 +47,11 @@ class PdpSpec extends Specification {
 
     void setupSpec() {
         url = null == url ? System.getenv("TEST_DATASOURCES_DEFAULT_URL") : url
-        sql = Sql.newInstance(url)
+        try {
+            sql = Sql.newInstance(url)
+        }catch (NullPointerException e){
+            throw new RuntimeException("Environment variable 'TEST_DATASOURCES_DEFAULT_URL' must be set", e)
+        }
         tcins = sql.rows("select tcin FROM target_pdp TABLESAMPLE BERNOULLI (5) LIMIT 20")
                 .collect(row -> row.tcin as String)
         locations = sql.rows('select location_id, location_name FROM target_stores TABLESAMPLE BERNOULLI (5) LIMIT 20')
