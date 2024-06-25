@@ -17,7 +17,7 @@
     <jdk.version>17</jdk.version>
     <release.version>17</release.version>
     <micronaut.version>4.5.0</micronaut.version>
-    <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
+    <micronaut.test.resources.enabled>false</micronaut.test.resources.enabled>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.organization>graqr</sonar.organization>
     <sonar.projectKey>Graqr_threshr-cli</sonar.projectKey>
@@ -41,6 +41,7 @@
       <groupId>com.graqr</groupId>
       <artifactId>threshr</artifactId>
       <version>0.0.13</version>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>info.picocli</groupId>
@@ -75,7 +76,6 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.yaml</groupId>
