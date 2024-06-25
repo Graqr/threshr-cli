@@ -41,7 +41,7 @@
       <groupId>com.graqr</groupId>
       <artifactId>threshr</artifactId>
       <version>0.0.13</version>
-      <scope>runtime</scope>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>info.picocli</groupId>
